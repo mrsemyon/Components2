@@ -2,5 +2,17 @@
 
 require __DIR__ . '/Database.php';
 
-Database::getInstance();
-Database::getInstance();
+$users = Database::getInstance()->query('SELECT * FROM users');
+var_dump($users->count());
+if ($users->error()) {
+    echo 'We have error: <br>';
+    echo $users->error();
+} else {
+    foreach($users->results() as $user) {
+        echo $user->name . '<br>';
+    }
+}
+
+// if ($users->conut() {
+
+// }
