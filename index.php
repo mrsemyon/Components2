@@ -1,9 +1,11 @@
 <?php
 
-require __DIR__ . '/Database.php';
+require 'Database.php';
 
-$users = Database::getInstance()->query("SELECT * FROM users WHERE name IN (?, ?)", ['Nancy A', 'Jim Ketty']);
-var_dump($users->count());
+//$users = Database::getInstance()->query("SELECT * FROM users WHERE id > ?", [4]);
+//$users = Database::getInstance()->action('SELECT *', 'users', ['id', '>', '4']);
+$users = Database::getInstance()->get('users', ['id', '>', '4']);
+//$users = Database::getInstance()->delete('users', ['id', '=', '10']);
 if ($users->error()) {
     echo 'We have error: <br>';
     echo $users->error();
@@ -12,7 +14,3 @@ if ($users->error()) {
         echo $user->name . '<br>';
     }
 }
-
-// if ($users->conut() {
-
-// }
