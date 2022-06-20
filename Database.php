@@ -26,10 +26,19 @@ class Database
         return self::$instance;
     }
 
-    public function query($sql)
+    public function query($sql, $params = [])
     {
         $this->error = false;
         $this->query = $this->pdo->prepare($sql);
+
+        $i = 1;
+        if (count($params)) {
+            foreach ($params as $param) {
+                $this->query->bindValue($i, $param);
+                $i++;
+            }
+        }
+
         try {
             $this->query->execute();
             $this->results = $this->query->fetchAll(PDO::FETCH_OBJ);
