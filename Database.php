@@ -87,6 +87,20 @@ class Database
         return false;
     }
 
+    public function update($table, $id, $fields)
+    {
+        $set = '';
+        foreach ($fields as $key => $value) {
+            $set .= $key . ' = ?, ';
+        }
+        $set = rtrim($set, ', ');
+        $sql = "UPDATE $table SET $set WHERE id = $id";
+        if (!$this->query($sql, $fields)->error()) {
+            return true;
+        }
+        return false;
+    }
+
     public function action($action, $table, $where = [])
     {
         if (count($where) === 3) {
@@ -107,5 +121,9 @@ class Database
         return false;
     }
 
+    public function first()
+    {
+        return $this->results()[0];
+    }
 
 }

@@ -4,13 +4,20 @@ require 'Database.php';
 
 //$users = Database::getInstance()->query("SELECT * FROM users WHERE id > ?", [4]);
 //$users = Database::getInstance()->action('SELECT *', 'users', ['id', '>', '4']);
-//$users = Database::getInstance()->get('users', ['id', '>', '4']);
+$users = Database::getInstance()->get('users', ['id', '>', '4']);
 //$users = Database::getInstance()->delete('users', ['id', '=', '10']);
-Database::getInstance()->insert('users', [
-    'email' => 'lol',
-    'password' => 'kek',
-    'role' => 'princess',
-]);
+// Database::getInstance()->insert('users', [
+//     'email' => 'lol',
+//     'password' => 'kek',
+//     'role' => 'princess',
+// ]);
+// Database::getInstance()->update('users', 11, [
+//     'email' => 'lol2',
+//     'password' => 'kek2',
+//     'role' => 'princess2',
+// ]);
+
+echo $users->first()->email;
 
 // if ($users->error()) {
 //     echo 'We have error: <br>';
