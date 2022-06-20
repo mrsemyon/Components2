@@ -39,14 +39,6 @@ class Database
             }
         }
 
-        // try {
-        //     $this->query->execute();
-        //     $this->results = $this->query->fetchAll(PDO::FETCH_OBJ);
-        //     $this->count = $this->query->rowCount();
-        // } catch (PDOException $exception) {
-        //     $this->error = $exception->getMessage() . '<br>';
-        // }
-
         if(!$this->query->execute()) {
             $this->error = true;
         } else {
@@ -79,6 +71,20 @@ class Database
     public function delete($table, $where = [])
     {
         return $this->action('DELETE', $table, $where = []);
+    }
+
+    public function insert($table, $fields = [])
+    {   
+        $values = '';
+        for ($i=0; $i < count($fields); $i++) { 
+            $values .= '?, ';
+        }
+        $values = rtrim($values, ', ');
+        $sql = "INSERT INTO $table (`" . implode('`, `', array_keys($fields)) . "`) VALUES (" . $values . ")";
+        if (!$this->query($sql, $fields)->error()) {
+            return true;
+        }
+        return false;
     }
 
     public function action($action, $table, $where = [])
