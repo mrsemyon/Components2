@@ -1,11 +1,21 @@
 <?php
 
 require 'Database.php';
+require 'Config.php';
 
-//$users = Database::getInstance()->query("SELECT * FROM users WHERE id > ?", [4]);
-//$users = Database::getInstance()->action('SELECT *', 'users', ['id', '>', '4']);
+$GLOBALS['config'] = [
+    'mysql' => [
+        'host'     => 'localhost',
+        'username' => 'root',
+        'password' => 'root',
+        'database' => 'dive',
+    ],
+];
+
+// $users = Database::getInstance()->query("SELECT * FROM users WHERE id > ?", [4]);
+// $users = Database::getInstance()->action('SELECT *', 'users', ['id', '>', '4']);
 $users = Database::getInstance()->get('users', ['id', '>', '4']);
-//$users = Database::getInstance()->delete('users', ['id', '=', '10']);
+// Database::getInstance()->delete('users', ['id', '=', '10']);
 // Database::getInstance()->insert('users', [
 //     'email' => 'lol',
 //     'password' => 'kek',
@@ -17,13 +27,13 @@ $users = Database::getInstance()->get('users', ['id', '>', '4']);
 //     'role' => 'princess2',
 // ]);
 
-echo $users->first()->email;
+//echo $users->first()->email;
 
-// if ($users->error()) {
-//     echo 'We have error: <br>';
-//     echo $users->error();
-// } else {
-//     foreach($users->results() as $user) {
-//         echo $user->name . '<br>';
-//     }
-// }
+if ($users->error()) {
+    echo 'We have error: <br>';
+    echo $users->error();
+} else {
+    foreach($users->results() as $user) {
+        echo $user->name . '<br>';
+    }
+}

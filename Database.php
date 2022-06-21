@@ -12,7 +12,12 @@ class Database
     private function __construct()
     {
         try {
-            $this->pdo = new PDO('mysql:host=localhost;dbname=dive', 'root', 'root');
+            $this->pdo = new PDO(
+                'mysql:host=' . Config::get('mysql.host') .
+                ';dbname=' . Config::get('mysql.database'),
+                Config::get('mysql.username'),
+                Config::get('mysql.password')
+            );
         } catch (PDOException $exception) {
             die($exception->getMessage());
         }
