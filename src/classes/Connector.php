@@ -2,8 +2,12 @@
 
 class Connector
 {
-    public static function make()
+    public static function make($config)
     {
-        return new PDO('mysql:host=127.0.0.1;dbname=components;charset=utf8', 'root', 'root');
+        return new PDO(
+            "mysql:host={$config['host']};dbname={$config['name']};charset={$config['charset']}",
+            $config['user'],
+            $config['password']
+        );
     }
 }
