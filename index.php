@@ -1,3 +1,8 @@
+<?php
+$pdo = new PDO('mysql:host=127.0.0.1;dbname=components;charset=utf8', 'root', 'root');
+$statement = $pdo->query('SELECT * FROM `posts`');
+$posts = $statement->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,14 +46,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td>Mark</td>
-                                <td>
-                                    <a href="edit.php" class="btn btn-warning">Edit</a>
-                                    <a href="delete.php" class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
+                            <?php foreach ($posts as $post) : ?>
+                                <tr>
+                                    <th><?= $post['id'] ?></th>
+                                    <td><?= $post['title'] ?></td>
+                                    <td>
+                                        <a href="edit.php" class="btn btn-warning">Edit</a>
+                                        <a href="delete.php" class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
                         </tbody>
                     </table>
 
