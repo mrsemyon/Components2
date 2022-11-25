@@ -1,6 +1,6 @@
 <?php
-include 'functions.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/src/core.php';
 
-$posts = getAllPosts();
+$posts = $db->getAll();
 
 include 'index.view.php';
