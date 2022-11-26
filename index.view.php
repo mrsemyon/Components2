@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">My blog</a>
+            <a class="navbar-brand" href="">My blog</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -46,7 +46,7 @@
                                     <th><?= $post['id'] ?></th>
                                     <td><a href="show.php?id=<?= $post['id'] ?>" class="text-reset text-decoration-none"><?= $post['title'] ?></a></td>
                                     <td>
-                                        <a href="edit.php" class="btn btn-warning">Edit</a>
+                                        <a href="edit.php?id=<?= $post['id'] ?>" class="btn btn-warning">Edit</a>
                                         <a href="delete.php" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
