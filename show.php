@@ -1,3 +1,8 @@
+<?php
+include $_SERVER['DOCUMENT_ROOT'] . '/src/core.php';
+
+$post = $db->getOne('posts', $_GET['id']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <title>Document</title>
+    <title>Show</title>
 </head>
 
 <body>
@@ -28,32 +33,10 @@
     <main>
         <div class="container">
             <div class="row">
-                <div class="col-md-8 offset-md-2 mt-5">
-                    <div class="mb-5">
-                        <a href="add.php" class="btn btn-success">Add post</a>
+                <div class="col-md-8 offset-md-2">
+                    <div class="mt-5">
+                        <h1><?= $post['title'] ?></h1>
                     </div>
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th style="width:10%">#</th>
-                                <th>Title</th>
-                                <th style="width:18%">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($posts as $post) : ?>
-                                <tr>
-                                    <th><?= $post['id'] ?></th>
-                                    <td><a href="show.php?id=<?= $post['id'] ?>" class="text-reset text-decoration-none"><?= $post['title'] ?></a></td>
-                                    <td>
-                                        <a href="edit.php" class="btn btn-warning">Edit</a>
-                                        <a href="delete.php" class="btn btn-danger">Delete</a>
-                                    </td>
-                                </tr>
-                            <?php endforeach ?>
-                        </tbody>
-                    </table>
-
                 </div>
             </div>
         </div>
