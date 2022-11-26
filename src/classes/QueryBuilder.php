@@ -30,4 +30,16 @@ class QueryBuilder
         $statement->execute($data);
         return $this->pdo->lastInsertId();
     }
+
+    public function update($table, $id, $title)
+    {
+        $sql = "UPDATE {$table} SET `title` = :title WHERE id = :id";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute(
+            [
+                'id'    => $id,
+                'title' => $title
+            ]
+        );
+    }
 }
