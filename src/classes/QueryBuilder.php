@@ -15,6 +15,13 @@ class QueryBuilder
         return $statement->fetchAll();
     }
 
+    public function getOne($table, $id)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM $table WHERE id = :id");
+        $statement->execute(['id' => $id]);
+        return $statement->fetch();
+    }
+
     public function create($table, $data)
     {
         $keys = implode(', ', array_keys($data));
