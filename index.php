@@ -1,6 +1,8 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/src/core.php';
 
-$posts = $db->getAll();
+$qb = new App\QueryBuilder($db);
+
+$posts = $qb->getAll();
 
 include 'index.view.php';

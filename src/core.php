@@ -1,6 +1,5 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/src/config.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/src/classes.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/src/functions.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 
-$db = new QueryBuilder(Connector::make($config['mysql']));
+$db = App\Connector::make($config['mysql']);
