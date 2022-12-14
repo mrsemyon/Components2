@@ -1,5 +1,6 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/src/core.php';
+
+require $_SERVER['DOCUMENT_ROOT'] . '/../src/core.php';
 
 use Aura\SqlQuery\QueryFactory;
 
@@ -11,4 +12,4 @@ $statement = $db->prepare($select);
 $statement->execute();
 $posts = $statement->fetchAll();
 
-include 'index.view.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/../index.view.php';
