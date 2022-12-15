@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2 mt-5">
                     <div class="mb-5">
-                        <a href="add.php" class="btn btn-success">Add post</a>
+                        <a href="/add" class="btn btn-success">Add post</a>
                     </div>
                     <table class="table table-bordered table-hover">
                         <thead>

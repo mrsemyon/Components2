@@ -29,7 +29,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <form action="store.php" method="POST">
+                    <form action="/controllers/add" method="POST">
                         <div class="form-group mt-5">
                             <label for="title">Enter new value</label>
                             <input type="text" name="title" id="title" class="form-control">

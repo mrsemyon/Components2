@@ -35,9 +35,10 @@ class QueryBuilder
 
     public function create($table, $data)
     {
-        $keys = implode(', ', array_keys($data));
-        $values = ':' . implode(', :', array_keys($data));
-        $statement = $this->pdo->prepare("INSERT INTO {$table} ({$keys}) VALUES ({$values})");
+        $insert = $this->queryFactory->newInsert();
+
+        $insert->into($table)->cols($data);
+        $statement = $this->pdo->prepare($insert);
         $statement->execute($data);
         return $this->pdo->lastInsertId();
     }
