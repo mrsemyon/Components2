@@ -2,18 +2,27 @@
 
 namespace App;
 
+use Aura\SqlQuery\QueryFactory;
+
 class QueryBuilder
 {
-    protected $pdo;
+    private $pdo;
+    private $queryFactory;
 
     public function __construct($pdo)
     {
         $this->pdo = $pdo;
+        $this->queryFactory = new QueryFactory('mysql');
     }
 
     public function getAll()
     {
-        $statement = $this->pdo->query("SELECT * FROM `posts`");
+        $select = $this->queryFactory->newSelect();
+        $select->cols(['*'])->from('posts');
+
+        $statement = $this->pdo->prepare($select);
+        $statement->execute();
+
         return $statement->fetchAll();
     }
 
