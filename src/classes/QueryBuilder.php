@@ -45,14 +45,15 @@ class QueryBuilder
 
     public function update($table, $id, $title)
     {
-        $sql = "UPDATE {$table} SET `title` = :title WHERE id = :id";
-        $statement = $this->pdo->prepare($sql);
-        $statement->execute(
-            [
-                'id'    => $id,
-                'title' => $title
-            ]
-        );
+        $update = $this->queryFactory->newUpdate();
+        $update
+        ->table($table)
+        ->cols($title)
+        ->where('id = :id')
+        ->bindValue('id', $id);
+
+        $statement = $this->pdo->prepare($update->getStatement());
+        $statement->execute($update->getBindValues());
     }
 
     public function delete($table, $id)

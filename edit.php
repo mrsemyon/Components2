@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/src/core.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/../src/core.php';
 
 $post = $db->getOne('posts', $_GET['id']);
 ?>
@@ -34,7 +34,7 @@ $post = $db->getOne('posts', $_GET['id']);
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <form action="update.php?id=<?= $post['id'] ?>" method="POST">
+                    <form action="controllers/edit?id=<?= $post['id'] ?>" method="POST">
                         <div class="form-group mt-5">
                             <label for="title">Enter new value</label>
                             <input type="text" name="title" id="title" class="form-control" placeholder="<?= $post['title'] ?>">
