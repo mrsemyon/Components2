@@ -1,37 +1,24 @@
 <?php
+
+if (!session_id()) @session_start();
+
+include $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/../src/core.php';
 
+flash()->message('Hot!');
+$output = flash()->display();
 d($db);
-
-// $templates = new League\Plates\Engine('../src/views');
-
-// if (($_SERVER['REDIRECT_URL'] == '/home') || $_SERVER['REDIRECT_URL'] == '/') {
-//     echo $templates->render('homepage', ['name' => 'Jonathan']);
-// }
-// if ($_SERVER['REDIRECT_URL'] == '/about') {
-//     echo $templates->render('about', ['name' => 'Jonathan']);
-// }
-
-
-// if ($_SERVER['REDIRECT_URL'] == '/add') {
-//     require '../add.php';
-// }
-// if ($_SERVER['REDIRECT_URL'] == '/controllers/add') {
-//     require '../src/controllers/add.php';
-// }
-
-// if ($_SERVER['REDIRECT_URL'] == '/edit') {
-//     $_GET[] = $_SERVER["QUERY_STRING"];
-//     require '../edit.php';
-// }
-// if ($_SERVER['REDIRECT_URL'] == '/controllers/edit') {
-//     $_GET[] = $_SERVER["QUERY_STRING"];
-//     require '../src/controllers/edit.php';
-// }
-
-// if ($_SERVER['REDIRECT_URL'] == '/controllers/delete') {
-//     $_GET[] = $_SERVER["QUERY_STRING"];
-//     require '../src/controllers/delete.php';
-// }
-
-exit;
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <?=$output?>
+</body>
+</html>
