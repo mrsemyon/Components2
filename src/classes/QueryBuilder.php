@@ -58,7 +58,9 @@ class QueryBuilder
 
     public function delete($table, $id)
     {
-        $statement = $this->pdo->prepare("DELETE FROM {$table} WHERE `id` = :id");
+        $delete = $this->queryFactory->newDelete();
+        $delete->from($table)->where('id = :id');
+        $statement = $this->pdo->prepare($delete);
         $statement->execute(['id' => $id]);
     }
 }

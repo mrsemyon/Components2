@@ -21,4 +21,9 @@ if ($_SERVER['REDIRECT_URL'] == '/controllers/edit') {
     require '../src/controllers/edit.php';
 }
 
+if ($_SERVER['REDIRECT_URL'] == '/controllers/delete') {
+    $_GET[] = $_SERVER["QUERY_STRING"];
+    require '../src/controllers/delete.php';
+}
+
 exit;
