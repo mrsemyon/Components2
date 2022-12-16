@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '790cbb24f95468dff14c0dc574954d6e5904b852',
+        'reference' => '220c4977c095aec27021848f0365c40561f38c5b',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '790cbb24f95468dff14c0dc574954d6e5904b852',
+            'reference' => '220c4977c095aec27021848f0365c40561f38c5b',
             'dev_requirement' => false,
         ),
         'aura/sqlquery' => array(
@@ -27,6 +27,15 @@
             'aliases' => array(),
             'reference' => '3cadc8bbdeb6cde5fde01349bbd5c4b0fbc1287e',
             'dev_requirement' => false,
+        ),
+        'kint-php/kint' => array(
+            'pretty_version' => '5.0.1',
+            'version' => '5.0.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../kint-php/kint',
+            'aliases' => array(),
+            'reference' => 'dd7fbd9673a88f6c5d2f838aacb2340afa4ce044',
+            'dev_requirement' => true,
         ),
         'league/plates' => array(
             'pretty_version' => 'v3.4.0',

@@ -1,14 +1,16 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/../src/core.php';
 
-$templates = new League\Plates\Engine('../src/views');
+d($db);
 
-if (($_SERVER['REDIRECT_URL'] == '/home') || $_SERVER['REDIRECT_URL'] == '/') {
-    echo $templates->render('homepage', ['name' => 'Jonathan']);
-}
-if ($_SERVER['REDIRECT_URL'] == '/about') {
-    echo $templates->render('about', ['name' => 'Jonathan']);
-}
+// $templates = new League\Plates\Engine('../src/views');
+
+// if (($_SERVER['REDIRECT_URL'] == '/home') || $_SERVER['REDIRECT_URL'] == '/') {
+//     echo $templates->render('homepage', ['name' => 'Jonathan']);
+// }
+// if ($_SERVER['REDIRECT_URL'] == '/about') {
+//     echo $templates->render('about', ['name' => 'Jonathan']);
+// }
 
 
 // if ($_SERVER['REDIRECT_URL'] == '/add') {
