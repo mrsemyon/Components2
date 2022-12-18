@@ -2,11 +2,12 @@
     "require": {
         "aura/sqlquery": "2.8.0",
         "league/plates": "^3.4",
-        "tamtamchik/simple-flash": "^2.0"
+        "tamtamchik/simple-flash": "^2.0",
+        "nikic/fast-route": "^1.3"
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/classes/"
+            "App\\": "App/"
         }
     },
     "require-dev": {

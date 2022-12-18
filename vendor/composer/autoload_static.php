@@ -8,6 +8,7 @@ class ComposerStaticInit04cf5dba7405b0a143b0a83ab7a37f94
 {
     public static $files = array (
         '3917c79c5052b270641b5a200963dbc2' => __DIR__ . '/..' . '/kint-php/kint/init.php',
+        '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         '6157b075b923803e5ef157aeb43b83bd' => __DIR__ . '/..' . '/tamtamchik/simple-flash/src/function.php',
     );
 
@@ -23,6 +24,10 @@ class ComposerStaticInit04cf5dba7405b0a143b0a83ab7a37f94
         'K' => 
         array (
             'Kint\\' => 5,
+        ),
+        'F' => 
+        array (
+            'FastRoute\\' => 10,
         ),
         'A' => 
         array (
@@ -44,13 +49,17 @@ class ComposerStaticInit04cf5dba7405b0a143b0a83ab7a37f94
         array (
             0 => __DIR__ . '/..' . '/kint-php/kint/src',
         ),
+        'FastRoute\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nikic/fast-route/src',
+        ),
         'Aura\\SqlQuery\\' => 
         array (
             0 => __DIR__ . '/..' . '/aura/sqlquery/src',
         ),
         'App\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src/classes',
+            0 => __DIR__ . '/../..' . '/App',
         ),
     );
 
