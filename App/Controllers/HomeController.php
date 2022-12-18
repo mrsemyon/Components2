@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Classes\Database;
+
 class HomeController
 {
     private $templates;
@@ -13,7 +15,9 @@ class HomeController
 
     public function index($vars)
     {
-        echo $this->templates->render('homepage', ['name' => 'Jonathan']);
+        $statement = Database::getInstance()->query('SELECT * FROM `posts`');
+        $posts = $statement->fetchAll();
+        echo $this->templates->render('homepage', ['posts' => $posts]);
     }
 
     public function about($vars)
