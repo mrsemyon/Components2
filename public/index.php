@@ -1,24 +1,30 @@
 <?php
+require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 
-if (!session_id()) @session_start();
+$dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
+    $r->addRoute('GET', '/home', ['App\Controllers\HomeController', 'index']);
+    $r->addRoute('GET', '/about', ['App\Controllers\HomeController', 'about']);
+});
 
-include $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/../src/core.php';
+$httpMethod = $_SERVER['REQUEST_METHOD'];
+$uri = $_SERVER['REQUEST_URI'];
 
-flash()->message('Hot!');
-$output = flash()->display();
-d($db);
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <title>Document</title>
-</head>
-<body>
-    <?=$output?>
-</body>
-</html>
+if (false !== $pos = strpos($uri, '?')) {
+    $uri = substr($uri, 0, $pos);
+}
+$uri = rawurldecode($uri);
+
+$routeInfo = $dispatcher->dispatch($httpMethod, $uri);
+
+switch ($routeInfo[0]) {
+    case FastRoute\Dispatcher::NOT_FOUND:
+        break;
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        $allowedMethods = $routeInfo[1];
+        break;
+    case FastRoute\Dispatcher::FOUND:
+        $handler = $routeInfo[1];
+        $vars = $routeInfo[2];
+        call_user_func([new $handler[0], $handler[1]], $vars);
+        break;
+}
