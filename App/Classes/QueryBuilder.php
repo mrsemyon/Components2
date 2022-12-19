@@ -24,4 +24,14 @@ class QueryBuilder
 
         return $statement->fetchAll();
     }
+
+    public function getOne($table, $where)
+    {
+        $select = $this->queryFactory->newSelect();
+        $select->cols(['*'])->from($table)->where($where);
+
+        $statement = $this->pdo->query($select->getStatement());
+
+        return $statement->fetch();
+    }
 }
