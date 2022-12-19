@@ -34,4 +34,12 @@ class QueryBuilder
 
         return $statement->fetch();
     }
+
+    public function create($table, $data)
+    {
+        $insert = $this->queryFactory->newInsert();
+        $insert->into($table)->cols($data);
+        $statement = $this->pdo->prepare($insert);
+        $statement->execute($data);
+    }
 }
