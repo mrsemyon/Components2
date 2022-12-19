@@ -4,6 +4,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../App/core.php';
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/home', ['App\Controllers\HomeController', 'index']);
     $r->addRoute('GET', '/about', ['App\Controllers\HomeController', 'about']);
+    $r->addRoute('GET', '/show/{id:\d+}', ['App\Controllers\HomeController', 'show']);
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];

@@ -24,4 +24,9 @@ class HomeController
     {
         echo $this->templates->render('about', ['name' => 'Jonathan']);
     }
+
+    public function show($vars)
+    {
+        echo $this->templates->render('show', ['post' => $this->db->getOne('posts', "id = {$vars['id']}")]);
+    }
 }
