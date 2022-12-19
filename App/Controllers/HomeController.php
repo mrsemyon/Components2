@@ -20,9 +20,15 @@ class HomeController
         echo $this->templates->render('homepage', ['posts' => $this->db->getAll('posts')]);
     }
 
-    public function about($vars)
+    public function add($vars)
     {
-        echo $this->templates->render('about', ['name' => 'Jonathan']);
+        if ($_POST) {
+            $this->db->create('posts', $_POST);
+            header("Location:/home");
+            exit;
+        } else {
+        echo $this->templates->render('add');
+        }
     }
 
     public function show($vars)
