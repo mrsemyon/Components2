@@ -20,7 +20,7 @@
           <a class="nav-link<?= ($_SERVER['REQUEST_URI'] == '/home') ? ' active" aria-current="page' : ''?>" href="/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link<?= ($_SERVER['REQUEST_URI'] == '/about') ? ' active" aria-current="page' : ''?>" href="/about">About</a>
+          <a class="nav-link<?= ($_SERVER['REQUEST_URI'] == '/add') ? ' active" aria-current="page' : ''?>" href="/add">Add post</a>
         </li>
       </ul>
     </div>

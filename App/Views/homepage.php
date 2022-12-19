@@ -1,5 +1,4 @@
 <?php $this->layout('layout', ['title' => 'User Profile']) ?>
-
 <h1>Posts</h1>
 <div class="container">
     <div class="row">
