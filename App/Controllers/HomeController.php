@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Classes\Database;
+use App\Classes\QueryBuilder;
 
 class HomeController
 {
@@ -11,13 +12,12 @@ class HomeController
     public function __construct()
     {
         $this->templates = new \League\Plates\Engine('../App/Views');
+        $this->db = new QueryBuilder();
     }
 
     public function index($vars)
     {
-        $statement = Database::getInstance()->query('SELECT * FROM `posts`');
-        $posts = $statement->fetchAll();
-        echo $this->templates->render('homepage', ['posts' => $posts]);
+        echo $this->templates->render('homepage', ['posts' => $this->db->getAll('posts')]);
     }
 
     public function about($vars)
