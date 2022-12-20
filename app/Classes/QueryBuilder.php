@@ -39,7 +39,20 @@ class QueryBuilder
     {
         $insert = $this->queryFactory->newInsert();
         $insert->into($table)->cols($data);
-        $statement = $this->pdo->prepare($insert);
+
+        $statement = $this->pdo->prepare($insert->getStatement());
         $statement->execute($data);
+    }
+
+    public function delete($table, $where)
+    {
+        $whereKey = array_key_first($where);
+        $whereKey .= ' = :' . $whereKey;
+        
+        $delete = $this->queryFactory->newDelete();
+        $delete->from($table)->where($whereKey);
+
+        $statement = $this->pdo->prepare($delete);
+        $statement->execute($where);
     }
 }
