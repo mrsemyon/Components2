@@ -35,4 +35,11 @@ class HomeController
     {
         echo $this->templates->render('show', ['post' => $this->db->getOne('posts', "id = {$vars['id']}")]);
     }
+
+    public function delete($vars)
+    {
+        $this->db->delete('posts', $vars);
+        header("Location:/home");
+        exit;
+    }
 }

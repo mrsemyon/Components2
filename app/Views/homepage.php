@@ -18,7 +18,7 @@
                 <td><a class="text-reset text-decoration-none" href="/show/<?= $post['id'] ?>"><?= $post['title'] ?></a></td>
                 <td>
                     <a href="edit.php" class="btn btn-warning">Edit</a>
-                    <a href="delete.php" class="btn btn-danger">Delete</a>
+                    <a href="/delete/<?= $post['id'] ?>" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         <?php endforeach ?>

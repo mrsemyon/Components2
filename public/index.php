@@ -6,6 +6,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/home', ['App\Controllers\HomeController', 'index']);
     $r->addRoute(['GET', 'POST'], '/add', ['App\Controllers\HomeController', 'add']);
     $r->addRoute('GET', '/show/{id:\d+}', ['App\Controllers\HomeController', 'show']);
+    $r->addRoute('GET', '/delete/{id:\d+}', ['App\Controllers\HomeController', 'delete']);
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];
