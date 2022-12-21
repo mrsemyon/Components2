@@ -2,11 +2,13 @@
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/../app/config.php';
 
-$dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/home', ['App\Controllers\HomeController', 'index']);
     $r->addRoute(['GET', 'POST'], '/add', ['App\Controllers\HomeController', 'add']);
     $r->addRoute('GET', '/show/{id:\d+}', ['App\Controllers\HomeController', 'show']);
     $r->addRoute('GET', '/delete/{id:\d+}', ['App\Controllers\HomeController', 'delete']);
+    $r->addRoute('GET', '/edit/{id:\d+}', ['App\Controllers\HomeController', 'edit']);
+    $r->addRoute('POST', '/edit', ['App\Controllers\HomeController', 'edit']);
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];

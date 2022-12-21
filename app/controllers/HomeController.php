@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Classes\Database;
 use App\Classes\QueryBuilder;
 
 class HomeController
@@ -27,7 +26,7 @@ class HomeController
             header("Location:/home");
             exit;
         } else {
-        echo $this->templates->render('add');
+            echo $this->templates->render('add');
         }
     }
 
@@ -41,5 +40,16 @@ class HomeController
         $this->db->delete('posts', $vars);
         header("Location:/home");
         exit;
+    }
+
+    public function edit($vars)
+    {
+        if ($_POST) {
+            $this->db->update('posts', $_POST['id'], $_POST['title']);
+            header("Location:/home");
+            exit;
+        } else {
+            echo $this->templates->render('edit', ['id' => $vars['id']]);
+        }
     }
 }
