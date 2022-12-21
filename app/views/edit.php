@@ -8,8 +8,9 @@
                         <label for="title">Enter new value</label>
                         <input type="text" name="title" id="title" class="form-control">
                     </div>
+                    <input type="hidden" name="id" value="<?= $id ?>">
                     <div class="form-group mt-5">
-                        <button class="btn btn-success">Edit post</button>
+                        <button class="btn btn-warning">Edit post</button>
                     </div>
                 </form>
             </div>
