@@ -27,6 +27,7 @@
     </div>
 </nav>
     <main>
+        <?= flash()->display() ?>
         <div class="container">
             <div class="row">
                 <div class="col-md-12 mt-5">
