@@ -1,6 +1,7 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/../app/config.php';
+session_start();
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/home', ['App\Controllers\HomeController', 'index']);
@@ -8,6 +9,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->addRoute('GET', '/show/{id:\d+}', ['App\Controllers\HomeController', 'show']);
     $r->addRoute('GET', '/delete/{id:\d+}', ['App\Controllers\HomeController', 'delete']);
     $r->addRoute('GET', '/edit/{id:\d+}', ['App\Controllers\HomeController', 'edit']);
+    $r->addRoute('GET', '/edit', ['App\Controllers\HomeController', 'edit']);
     $r->addRoute('POST', '/edit', ['App\Controllers\HomeController', 'edit']);
 });
 

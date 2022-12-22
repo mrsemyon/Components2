@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Classes\QueryBuilder;
+use Tamtamchik\SimpleFlash\Flash;
 
 class HomeController
 {
@@ -48,8 +49,16 @@ class HomeController
             $this->db->update('posts', $_POST['id'], $_POST['title']);
             header("Location:/home");
             exit;
-        } else {
-            echo $this->templates->render('edit', ['id' => $vars['id']]);
         }
+        try {
+            if (empty($vars)) {
+                throw new \Exception("No post selected for editing");
+            }
+        } catch (\Exception $th) {
+            flash()->error($th->getMessage());
+            header("Location:/home");
+            exit;
+        }
+        echo $this->templates->render('edit', ['id' => $vars['id']]);
     }
 }
