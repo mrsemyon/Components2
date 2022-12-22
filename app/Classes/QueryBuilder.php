@@ -44,6 +44,18 @@ class QueryBuilder
         $statement->execute($data);
     }
 
+    public function update($table, $id, $title)
+    {
+        $sql = "UPDATE {$table} SET `title` = :title WHERE id = :id";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute(
+            [
+                'id'    => $id,
+                'title' => $title
+            ]
+        );
+    }
+
     public function delete($table, $where)
     {
         $whereKey = array_key_first($where);
