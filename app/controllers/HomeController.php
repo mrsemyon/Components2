@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Classes\QueryBuilder;
 use Tamtamchik\SimpleFlash\Flash;
+use App\Exceptions\DoesNotExist;
 
 class HomeController
 {
@@ -52,9 +53,9 @@ class HomeController
         }
         try {
             if (empty($vars)) {
-                throw new \Exception("No post selected for editing");
+                throw new DoesNotExist("No post selected for editing");
             }
-        } catch (\Exception $th) {
+        } catch (DoesNotExist $th) {
             flash()->error($th->getMessage());
             header("Location:/home");
             exit;
