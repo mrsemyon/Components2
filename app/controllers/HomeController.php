@@ -62,4 +62,9 @@ class HomeController
         }
         echo $this->templates->render('edit', ['id' => $vars['id']]);
     }
+
+    public function register($vars)
+    {
+        echo $this->templates->render('register');
+    }
 }

@@ -11,6 +11,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->addRoute('GET', '/edit/{id:\d+}', ['App\Controllers\HomeController', 'edit']);
     $r->addRoute('GET', '/edit', ['App\Controllers\HomeController', 'edit']);
     $r->addRoute('POST', '/edit', ['App\Controllers\HomeController', 'edit']);
+    $r->addRoute('GET', '/register', ['App\Controllers\HomeController', 'register']);
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];
