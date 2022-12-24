@@ -67,4 +67,9 @@ class HomeController
     {
         echo $this->templates->render('register');
     }
+
+    public function login($vars)
+    {
+        echo $this->templates->render('login');
+    }
 }
