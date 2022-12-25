@@ -108,6 +108,9 @@
                     <li class="nav-item">
                         <a class="nav-link<?= ($_SERVER['REQUEST_URI'] == '/login') ? ' active" aria-current="page' : '' ?>" href="/login">Sign in</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Exit</a>
+                    </li>
                 </ul>
             </div>
         </div>
