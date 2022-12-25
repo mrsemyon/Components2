@@ -3,8 +3,11 @@
 namespace App\Controllers;
 
 use App\Classes\QueryBuilder;
-use Tamtamchik\SimpleFlash\Flash;
+use App\Classes\Database;
 use App\Exceptions\DoesNotExist;
+use Tamtamchik\SimpleFlash\Flash;
+use Delight\Auth\Auth;
+use League\Plates\Engine;
 
 class HomeController
 {
@@ -14,6 +17,7 @@ class HomeController
     {
         $this->templates = new \League\Plates\Engine('../App/Views');
         $this->db = new QueryBuilder();
+        $this->auth = new Auth(Database::getInstance());
     }
 
     public function index($vars)
@@ -63,9 +67,38 @@ class HomeController
         echo $this->templates->render('edit', ['id' => $vars['id']]);
     }
 
-    public function register($vars)
+    public function register()
     {
-        echo $this->templates->render('register');
+        if (empty($_POST)) {
+            echo $this->templates->render('register');
+            exit;
+        }
+        try {
+            $userId = $this->auth->register($_POST['email'], $_POST['password'], $_POST['username']);
+        }
+        catch (\Delight\Auth\InvalidEmailException $e) {
+            flash()->error('Invalid email address');
+            header("Location:/register");
+            exit;
+        }
+        catch (\Delight\Auth\InvalidPasswordException $e) {
+            flash()->error('Invalid password');
+            header("Location:/register");
+            exit;
+        }
+        catch (\Delight\Auth\UserAlreadyExistsException $e) {
+            flash()->error('User already exists');
+            header("Location:/register");
+            exit;
+        }
+        catch (\Delight\Auth\TooManyRequestsException $e) {
+            flash()->error('Too many requests');
+            header("Location:/register");
+            exit;
+        }
+        flash()->success('User successfully register');
+        header("Location:/home");
+        exit;
     }
 
     public function login($vars)
