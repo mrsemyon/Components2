@@ -1,6 +1,6 @@
 <?php $this->layout('layout', ['title' => 'Sign in']) ?>
 <main class="form-signin">
-    <form>
+    <form action="/login" method="POST">
         <h1 class="text-center h3 mb-3 fw-normal">Please sign in</h1>
 
         <div class="form-floating">

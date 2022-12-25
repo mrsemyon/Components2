@@ -101,8 +101,37 @@ class HomeController
         exit;
     }
 
-    public function login($vars)
+    public function login()
     {
-        echo $this->templates->render('login');
+        if (empty($_POST)) {
+            echo $this->templates->render('login');
+            exit;
+        }
+        try {
+            $this->auth->login($_POST['email'], $_POST['password']);
+        }
+        catch (\Delight\Auth\InvalidEmailException $e) {
+            flash()->error('Wrong email address');
+            header("Location:/login");
+            exit;
+        }
+        catch (\Delight\Auth\InvalidPasswordException $e) {
+            flash()->error('Wrong password');
+            header("Location:/login");
+            exit;
+        }
+        catch (\Delight\Auth\EmailNotVerifiedException $e) {
+            flash()->error('Email not verified');
+            header("Location:/login");
+            exit;
+        }
+        catch (\Delight\Auth\TooManyRequestsException $e) {
+            flash()->error('Too many requests');
+            header("Location:/login");
+            exit;
+        }
+        flash()->success('User successfully logged in');
+        header("Location:/home");
+        exit;
     }
 }
