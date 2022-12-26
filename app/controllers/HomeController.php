@@ -138,10 +138,10 @@ class HomeController
     public function logout()
     {
         try {
-            $this->auth->logOutEverywhereElse();
+            $this->auth->logOutEverywhere();
         }
         catch (\Delight\Auth\NotLoggedInException $e) {
-            flash()->success('Not logged in');
+            flash()->error('Not logged in');
         }
         header("Location:/home");
         exit;

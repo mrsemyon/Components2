@@ -1,3 +1,6 @@
+<?php
+$auth = new \Delight\Auth\Auth(App\Classes\Database::getInstance());
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -102,6 +105,7 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-md-auto">
+                    <?php if (!$auth->isLoggedIn()): ?>
                     <li class="nav-item">
                         <a class="nav-link<?= ($_SERVER['REQUEST_URI'] == '/register') ? ' active" aria-current="page' : '' ?>" href="/register">Sing up</a>
                     </li>
@@ -111,6 +115,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Exit</a>
                     </li>
+                    <?php else :?>
+                    <li class="nav-item">
+                        <p class="nav-link active"><?= $auth->getUsername()?></p>
+                    </li>
+                    <?php endif ?>
                 </ul>
             </div>
         </div>
