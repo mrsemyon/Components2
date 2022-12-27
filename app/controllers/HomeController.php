@@ -8,6 +8,7 @@ use App\Exceptions\DoesNotExist;
 use Tamtamchik\SimpleFlash\Flash;
 use Delight\Auth\Auth;
 use League\Plates\Engine;
+use Faker\Factory;
 
 class HomeController
 {
@@ -155,5 +156,15 @@ class HomeController
         ->setSubject('Тема')
         ->setMessage('Сообщение')
         ->send());
+    }
+
+    public function faker()
+    {
+        $faker = Factory::create();
+        for ($i=0; $i < 10; $i++) { 
+            $this->db->create('posts', ['title' => ucfirst($faker->words(1, true))]);
+        }
+        header('Location:/home');
+        die;
     }
 }
