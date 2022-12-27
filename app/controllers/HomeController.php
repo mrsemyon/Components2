@@ -146,4 +146,14 @@ class HomeController
         header("Location:/home");
         exit;
     }
+
+    public function mail()
+    {
+        var_dump(\SimpleMail::make()
+        ->setTo('sky_net@mail.ru', 'Simon')
+        ->setFrom('info@example.com', 'Admin')
+        ->setSubject('Тема')
+        ->setMessage('Сообщение')
+        ->send());
+    }
 }

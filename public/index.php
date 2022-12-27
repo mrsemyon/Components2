@@ -14,6 +14,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->addRoute(['GET', 'POST'], '/register', ['App\Controllers\HomeController', 'register']);
     $r->addRoute(['GET', 'POST'], '/login', ['App\Controllers\HomeController', 'login']);
     $r->addRoute('GET', '/logout', ['App\Controllers\HomeController', 'logout']);
+    $r->addRoute('GET', '/mail', ['App\Controllers\HomeController', 'mail']);
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];
