@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use Aura\SqlQuery\QueryFactory;
 use App\Classes\QueryBuilder;
 use App\Classes\Database;
 use App\Exceptions\DoesNotExist;
@@ -19,11 +20,22 @@ class HomeController
         $this->templates = new \League\Plates\Engine('../App/Views');
         $this->db = new QueryBuilder();
         $this->auth = new Auth(Database::getInstance());
+        $this->queryFactory = new QueryFactory('mysql');
+        $this->pdo = Database::getInstance();
     }
 
     public function index($vars)
     {
-        echo $this->templates->render('homepage', ['posts' => $this->db->getAll('posts')]);
+        $select = $this->queryFactory->newSelect();
+        $select
+            ->cols(['*'])
+            ->from('posts')
+            ->setPaging(3)
+            ->page($_GET['page'] ?? 1);
+        $statement = $this->pdo->prepare($select->getStatement());
+        $statement->execute($select->getBindValues());
+        $posts = $statement->fetchAll();
+        echo $this->templates->render('homepage', ['posts' => $posts]);
     }
 
     public function add($vars)
