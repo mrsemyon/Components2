@@ -10,6 +10,7 @@ use Tamtamchik\SimpleFlash\Flash;
 use Delight\Auth\Auth;
 use League\Plates\Engine;
 use Faker\Factory;
+use JasonGrimes\Paginator;
 
 class HomeController
 {
@@ -29,13 +30,28 @@ class HomeController
         $select = $this->queryFactory->newSelect();
         $select
             ->cols(['*'])
+            ->from('posts');
+        $statement = $this->pdo->prepare($select->getStatement());
+        $statement->execute($select->getBindValues());
+        $totalItems = $statement->fetchAll();
+
+        $select = $this->queryFactory->newSelect();
+        $select
+            ->cols(['*'])
             ->from('posts')
             ->setPaging(3)
             ->page($_GET['page'] ?? 1);
         $statement = $this->pdo->prepare($select->getStatement());
         $statement->execute($select->getBindValues());
         $posts = $statement->fetchAll();
-        echo $this->templates->render('homepage', ['posts' => $posts]);
+
+        $itemsPerPage = 3;
+        $currentPage = $_GET['page'] ?? 1;
+        $urlPattern = '?page=(:num)';
+
+        $paginator = new Paginator(count($totalItems), $itemsPerPage, $currentPage, $urlPattern);
+
+        echo $this->templates->render('homepage', ['posts' => $posts, 'paginator' => $paginator]);
     }
 
     public function add($vars)

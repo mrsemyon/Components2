@@ -24,6 +24,7 @@
                     <?php endforeach ?>
                 </tbody>
             </table>
+            <?= $paginator ?>
         </div>
     </div>
 </div>
