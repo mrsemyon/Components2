@@ -3,6 +3,9 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/../app/config.php';
 session_start();
 
+$containerBuilder = new \DI\ContainerBuilder;
+$container = $containerBuilder->build();
+
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/home', ['App\Controllers\HomeController', 'index']);
     $r->addRoute(['GET', 'POST'], '/add', ['App\Controllers\HomeController', 'add']);
@@ -37,6 +40,7 @@ switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::FOUND:
         $handler = $routeInfo[1];
         $vars = $routeInfo[2];
-        call_user_func([new $handler[0], $handler[1]], $vars);
+        $container->call($routeInfo[1], $routeInfo[2]);
+        //call_user_func([new $handler[0], $handler[1]], $vars);
         break;
 }

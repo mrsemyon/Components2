@@ -16,16 +16,16 @@ class HomeController
 {
     private $templates;
 
-    public function __construct()
+    public function __construct(QueryBuilder $db)
     {
         $this->templates = new \League\Plates\Engine('../App/Views');
-        $this->db = new QueryBuilder();
+        $this->db = $db;
         $this->auth = new Auth(Database::getInstance());
         $this->queryFactory = new QueryFactory('mysql');
         $this->pdo = Database::getInstance();
     }
 
-    public function index($vars)
+    public function index()
     {
         $select = $this->queryFactory->newSelect();
         $select
