@@ -3,7 +3,27 @@ require $_SERVER['DOCUMENT_ROOT'] . '/../vendor/autoload.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/../app/config.php';
 session_start();
 
-$containerBuilder = new \DI\ContainerBuilder;
+use League\Plates\Engine;
+use Delight\Auth\Auth;
+use App\Classes\Database;
+use Aura\SqlQuery\QueryFactory;
+use \DI\ContainerBuilder;
+
+$containerBuilder = new ContainerBuilder;
+$containerBuilder->addDefinitions([
+    Engine::class => function() {
+        return new Engine('../app/views');
+    },
+    Auth::class => function() {
+        return new Auth(Database::getInstance());
+    },
+    QueryFactory::class => function() {
+        return new QueryFactory('mysql');
+    },
+    PDO::class => function() {
+        return Database::getInstance();
+    }
+]);
 $container = $containerBuilder->build();
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
@@ -41,6 +61,5 @@ switch ($routeInfo[0]) {
         $handler = $routeInfo[1];
         $vars = $routeInfo[2];
         $container->call($routeInfo[1], $routeInfo[2]);
-        //call_user_func([new $handler[0], $handler[1]], $vars);
         break;
 }

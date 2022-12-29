@@ -15,14 +15,24 @@ use JasonGrimes\Paginator;
 class HomeController
 {
     private $templates;
+    private $qb;
+    private $auth;
+    private $queryFactory;
+    private $pdo;
 
-    public function __construct(QueryBuilder $db)
+    public function __construct(
+        QueryBuilder $qb,
+        Engine $engine,
+        Auth $auth,
+        QueryFactory $queryFactory,
+        \PDO $pdo
+    )
     {
-        $this->templates = new \League\Plates\Engine('../App/Views');
-        $this->db = $db;
-        $this->auth = new Auth(Database::getInstance());
-        $this->queryFactory = new QueryFactory('mysql');
-        $this->pdo = Database::getInstance();
+        $this->templates = $engine;
+        $this->qb = $qb;
+        $this->auth = $auth;
+        $this->queryFactory = $queryFactory;
+        $this->pdo = $pdo;
     }
 
     public function index()
@@ -39,13 +49,13 @@ class HomeController
         $select
             ->cols(['*'])
             ->from('posts')
-            ->setPaging(3)
+            ->setPaging(5)
             ->page($_GET['page'] ?? 1);
         $statement = $this->pdo->prepare($select->getStatement());
         $statement->execute($select->getBindValues());
         $posts = $statement->fetchAll();
 
-        $itemsPerPage = 3;
+        $itemsPerPage = 5;
         $currentPage = $_GET['page'] ?? 1;
         $urlPattern = '?page=(:num)';
 
@@ -57,7 +67,7 @@ class HomeController
     public function add($vars)
     {
         if ($_POST) {
-            $this->db->create('posts', $_POST);
+            $this->qb->create('posts', $_POST);
             header("Location:/home");
             exit;
         } else {
@@ -67,12 +77,12 @@ class HomeController
 
     public function show($vars)
     {
-        echo $this->templates->render('show', ['post' => $this->db->getOne('posts', "id = {$vars['id']}")]);
+        echo $this->templates->render('show', ['post' => $this->qb->getOne('posts', "id = {$vars['id']}")]);
     }
 
     public function delete($vars)
     {
-        $this->db->delete('posts', $vars);
+        $this->qb->delete('posts', $vars);
         header("Location:/home");
         exit;
     }
@@ -80,7 +90,7 @@ class HomeController
     public function edit($vars)
     {
         if ($_POST) {
-            $this->db->update('posts', $_POST['id'], $_POST['title']);
+            $this->qb->update('posts', $_POST['id'], $_POST['title']);
             header("Location:/home");
             exit;
         }
@@ -190,7 +200,7 @@ class HomeController
     {
         $faker = Factory::create();
         for ($i=0; $i < 10; $i++) { 
-            $this->db->create('posts', ['title' => ucfirst($faker->words(1, true))]);
+            $this->qb->create('posts', ['title' => ucfirst($faker->words(1, true))]);
         }
         header('Location:/home');
         die;
